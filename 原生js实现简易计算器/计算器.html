@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>计算器</title>
+    <link rel="stylesheet" href="./1.css">
+</head>
+<body>
+    <div class="box">
+        <input type="number" class="shuru" value="" id="ipt">  
+        <div class="bo">
+            <button onclick="Add_count(this.innerText)">7</button>
+            <button onclick="Add_count(this.innerText)">8</button>
+            <button onclick="Add_count(this.innerText)">9</button>
+            <button onclick="delate()">del</button>
+            <button onclick="Add_count(this.innerText)">6</button>
+            <button onclick="Add_count(this.innerText)">5</button>
+            <button onclick="Add_count(this.innerText)">4</button>
+            <button onclick="Add_count(this.innerText)">+</button>
+            <button onclick="Add_count(this.innerText)">3</button>
+            <button onclick="Add_count(this.innerText)">2</button>
+            <button onclick="Add_count(this.innerText)">1</button>
+            <button onclick="Add_count(this.innerText)">-</button>
+            <button onclick="Add_count(this.innerText)">%</button>
+            <button onclick="Add_count(this.innerText)">0</button>
+            <button onclick="Add_count(this.innerText)">.</button>
+            <button onclick="Add_count(this.innerText)">*</button>
+            <button onclick="tuige()">←</button>
+            <button onclick="Add_count(this.innerText)">/</button>
+            <button class="la" onclick="sub()">=</button>
+        </div>  
+    </div>
+    <script>
+        var ipt = document.getElementById("ipt");
+        function Add_count(a){
+            ipt.value += a;
+        };
+        function delate() {
+            ipt.value  = "";
+        };
+        function sub() {
+            ipt.value = eval(ipt.value);
+        };
+        function tuige(){
+            ipt.value = ipt.value.slice(1,ipt.value.length-1);
+        }
+    </script>
+</body>
+</html>
