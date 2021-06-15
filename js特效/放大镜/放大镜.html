@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    #small{
+        position: relative;
+        margin: 50px;
+        width: 170px;
+        height: 170px;
+        background-image: url(../img/3.jpg);
+        background-repeat: no-repeat;
+        background-size: 300px;
+        float: left;
+        border: 1px solid #b0b0b0;
+    }
+    #big{
+        position: relative;
+        margin-top: 50px;
+        width: 170px;
+        height: 170px;
+        background-image: url(../img/3.jpg);
+        background-repeat: no-repeat;
+        background-size: 600px;
+        border: 1px solid #b0b0b0;
+        float: left;
+        display: none;
+    }
+    #search{
+        position: absolute;
+        width: 72px;
+        height: 72px;
+        background-color: rgba(255, 127, 80, 0.562);
+        display: none;
+    }
+</style>
+<body>
+    <div id="small">
+        <div id="search"></div>
+    </div>
+    <div id="big"></div>
+    <script>
+        var big = document.getElementById("big");
+        var small = document.getElementById("small");
+        var search = document.getElementById("search");
+        small.onmouseover = function(){
+          big.style.display = "block";
+          search.style.display= "block";
+        }
+        small.onmouseout =function(){
+            big.style.display = "none";
+          search.style.display= "none";
+        }
+        small.onmousemove = function(){
+            // 获取当前对象的位置
+          var evt = event||arguments[0];
+          var x = evt.clientX-small.offsetLeft-search.offsetWidth/2;
+          var y=evt.clientY-small.offsetTop-search.offsetHeight/2;
+        //   判断当前位置，search不能移出small框
+          if(x<0){
+                search.style.left=0+"px";
+            }else if(x>=small.offsetWidth-search.offsetWidth){
+                search.style.left=small.offsetWidth-search.offsetWidth+"px";
+            }else{
+                search.style.left=x+"px";
+            }
+            if(y<0){
+                search.style.top=0+"px";
+            }else if(y>=small.offsetHeight-search.offsetHeight){
+                search.style.top=small.offsetHeight-search.offsetHeight+"px";
+            }else{
+                search.style.top=y+"px";
+            };
+             //计算放大比例，这个比例是大图片和小图片的比例
+             var w=400/170;
+            //显示放大区域
+            big.style.backgroundPosition=(-search.offsetLeft)*w+"px"+" "+(-search.offsetTop)*w+"px";
+
+        }
+    </script>
+</body>
+</html>

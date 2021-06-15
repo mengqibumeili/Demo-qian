@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>雨天</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        body {
+
+            /*防止出现向下滚动条*/
+            overflow: hidden;
+        }
+
+        #box {
+            position: relative;
+            width: 100%;
+            height: 800px;
+            margin: auto;
+            background-color: rgb(27, 27, 27);
+        }
+
+        #bj {
+            position: absolute;
+            width: 100%;
+            height: 800px;
+    
+        }
+        #run{
+            position: absolute;
+            margin-top: 60px;
+            margin-left: 960px;
+            width: 250px;
+            height:30px;
+            border-radius: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <img id="bj" src="./img/4.jpg" alt="" width="100%" height="100%">
+        <audio id="run" 
+        src="https://m801.music.126.net/20210420112733/34fb32211685acbb90859073b7dd9597/jdymusic/obj/wo3DlMOGwrbDjj7DisKw/7224994363/3724/226a/f9f3/00c8a0843f2dabdef461bb91e4cd4684.mp3"
+         autoplay="autoplay" ></audio>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        
+        function drawRain() {
+            // 创建定时器，每秒创建一个雨滴
+         var tim = setInterval(function(){
+            // 创建雨滴模型
+            var rain = document.createElement("div");
+            //   调整雨滴样式 
+            rain.style.cssText = "position:absolute;width:2px;height:60px;borderRadius:2px";
+            rain.style.backgroundColor = "#fff";
+            var documentHieght = window.innerHeight;
+            var documentWidth = window.innerWidth;
+            //设置位置属性
+            rain.style.left = Math.round(Math.random() * documentWidth) + "px";
+            rain.style.top = "0px";
+            rain.style.opacity = Math.floor(Math.random() * 10) / 100 + 0.05;
+            var timer = setInterval(function () {
+                var height = parseInt(rain.style.top);		//雨滴与顶部距离的整型化
+                var k = 1;
+                k++;
+                rain.style.top = height + 5 * Math.pow(k, 2) + "px";	//雨滴每次下落的距离大小
+                var heg = parseInt(rain.style.top);
+                var time2 = setInterval(function () {	//雨滴逐渐透明的定时器
+                        rain.style.opacity = rain.style.opacity - 0.001;	//每次透明0.1
+                    }, 1000);
+                if (heg>= 640) {	//当雨滴到达底部
+                    rain.style.width = '5px';	//雨滴宽度变为500
+                    rain.style.height = '5px';	//雨滴高度变为5
+                    rain.style.borderRadius = "50%";	//圆形化雨滴
+                    rain.style.width = parseInt(rain.style.width)  + "px";	//雨滴宽度加20,拉长
+                    rain.style.left = parseInt(rain.style.left) - 12.5 + "px";
+                }
+                if (heg >= 640) {
+                    clearInterval(timer);
+                };
+            }, 200);
+            document.getElementById("box").appendChild(rain);
+        },70);
+        };
+        drawRain();
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #box{
+            width: 120px;
+            height: 40px;
+            line-height: 40px;
+            background-color: cadetblue;
+            border: 1px solid #b1b1b1;
+            border-radius: 5px;
+            box-shadow: 2px 2px 4px rgb(58, 59, 61);
+            text-align: center;
+        }
+        #demo{
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-size: 16px;
+            font-weight: 100;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <p id="demo"></p>
+    </div>
+    <script>
+        var myVar = setInterval(myTimer, 1000);
+        function myTimer() {
+            var d = new Date();
+            document.getElementById("demo").innerHTML = d.toLocaleTimeString();
+        }
+    </script>
+</body>
+
+</html>
