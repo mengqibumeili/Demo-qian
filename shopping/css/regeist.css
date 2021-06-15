@@ -1,0 +1,97 @@
+.header {
+border-bottom: 2px solid #c81523;
+}
+.regeist {
+    width: 1200px;
+    height: 521px;
+    background-color: #ffff;
+    border: 1px solid #e5e5e5;
+    margin-top: 20px;
+}
+.regeist .regeist_hd {
+    width: 1200px;
+    height: 40px;
+    background-color: #ececec;
+    line-height: 40px;
+}
+.regeist h3 {
+    float: left;
+    font-size: 18px;
+    color: #333333;
+    padding-left: 10px;
+}
+.regeist p {
+    float: right;
+    font-size: 14px;
+    color: #333333;
+    padding-right: 10px;
+}
+.regeist .reg_form {
+    margin:50px auto 0;  
+    width: 600px;
+}
+.regeist .reg_form ul li  {
+    margin-bottom: 20px;
+}
+.regeist .reg_form label {
+    display: inline-block;
+    width: 88px;
+    font-size: 14px;
+    color: #4c4c4c;
+    text-align:right;
+}
+.regeist .reg_form span {
+    font-size: 12px;
+    color: #df3033;
+}
+.regeist .reg_form i {
+    display: inline-block;
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
+    background: url(../images/error.png) no-repeat;
+    margin-top: -2px;
+}
+.safe {
+    padding-left: 164px;
+}
+.safe em {
+    padding: 0 12px;
+    color: #fff;
+}
+
+.ruo {
+    background-color:#de1111;
+}
+.zhong {
+    background-color:#40b83f;
+}
+.qiang {
+    background-color:#f79100;
+}
+
+.regeist .reg_form .inp {
+      width: 240px;
+      height: 36px;
+      outline: none;
+      border: 1px solid #ccc;
+}
+.agree {
+    padding-left: 93px;
+    margin-top: 24px;
+}
+.btn {
+    width: 200px;
+    height: 34px;
+    color: #fff;
+    background-color:#de1111;
+    margin-left: 93px;
+    margin-top: 32px;
+}
+.fot {
+    width: 1200px;
+    height: 110px;
+    background-color:#ffff;
+    text-align: center;
+}
+
