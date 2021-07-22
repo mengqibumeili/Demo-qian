@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+        }
+        #container {
+            position: absolute;
+            width: 210px;
+            height: 205px;
+            border-top: 1px solid #b1b1b1;
+            border-left: 1px solid #b1b1b1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 4px 4px 5px #b1b1b1b2;
+            /* display: flex; */
+            /* justify-content: center; */
+        }
+
+        .box {
+            border-right: 1px solid #b1b1b1;
+            border-bottom: 1px solid #b1b1b1;
+            box-sizing: border-box;
+            width: 30px;
+            height: 35px;
+            float: left;
+            text-align: center;
+            line-height: 35px;
+            cursor: pointer;
+        }
+        .box:hover{
+            box-shadow: 2px 2px 4px #b1b1b1ad;
+        }
+        .currentday{
+            border-right: 1px solid #b1b1b1;
+            border-bottom: 1px solid #b1b1b1;
+            box-sizing: border-box;
+            width: 30px;
+            height: 35px;
+            float: left;
+            text-align: center;
+            line-height: 35px;
+            background-color: aqua;
+        }
+        .currentday:hover{
+            box-shadow: 2px 2px 4px #b1b1b1ad;
+        }
+        #head {
+            width: 100%;
+            height: 15px;
+            border-bottom: 1px solid #b1b1b1;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+        }
+
+        #head span {
+            text-align: center;
+            line-height: 15px;
+            height: 15px;
+            border-right: 1px solid #b1b1b1;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        #head span:nth-child(2) {
+            width: 60%;
+        }
+
+        #head span:nth-child(1) {
+            width: 20%;
+        }
+
+        #head span:nth-child(3) {
+            width: 20%;
+        }
+
+        #day {
+            border-bottom: 1px solid #b1b1b1;
+            display: flex;
+            box-sizing: border-box;
+
+        }
+
+        #day span {
+            box-sizing: border-box;
+            border-right: 1px solid #b1b1b1;
+            width: 30px;
+            height: 15px;
+            text-align: center;
+            line-height: 15px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <div id="head">
+            <span onclick="subMonth()"><</span>
+            <span id="currentdate">123</span>
+            <span onclick="addMonth()">></span>
+        </div>
+        <div id="day">
+            <span>日</span>
+            <span>一</span>
+            <span>二</span>
+            <span>三</span>
+            <span>四</span>
+            <span>五</span>
+            <span>六</span>
+        </div>
+        <div id="content"></div>
+    </div>
+
+</body>
+<script>
+    // 初始数据
+    var currentdate = document.getElementById('currentdate');
+    var content = document.getElementById('content');
+    // 获取当前日期
+    var d = new Date();
+    var b = new Date().toLocaleDateString();
+    // 日期格式化，返回本地时间格式
+    var dat = d.toLocaleDateString(); 
+    // 返回今天是几号
+    var date = d.getDate();
+    // 返回今年是哪一年
+    var year = d.getFullYear();
+    // 返回这个月是几月份
+    var month = d.getMonth() -1;  
+    var cmonth = d.getMonth();
+    // 返回这个月1号是一周中的哪一天
+    var a = d.getDay(year,month,1);
+    // 返回上个月一共多少天
+    var day = new Date(year, month, 0).getDate();
+    var cday = new Date(year, cmonth, 0).getDate();
+    // num表示日历表第一个空格的日期,也就是这个月1号前面有多少天,等于上个月的天数减去1号前面的天数加上1
+    var num = day + a -8; //=day-(7-a) +1
+    // 生成日历
+    function showTime(){
+    // 设置日历头部的日期
+    currentdate.innerHTML = dat ;
+    // 生成日历
+    for (let i = 0;i<35; i++){
+        var box = document.createElement('div');
+        box.setAttribute('class','box');
+        box.innerHTML = num;
+        content.appendChild(box);
+        if(dat == b ){
+            if(num === date){
+            box.setAttribute('class','currentday')
+        }
+        }
+        if (num <cday){
+            num = num + 1;
+        }else{
+            num = 1;
+        }
+        
+       
+       
+    }
+    }
+    // 日期向前推一个月
+    function subMonth(){ 
+        // 清除数据
+        while(content.childNodes[0]){
+            content.removeChild(content.childNodes[0])
+        }
+        // 月份向前推一个月
+        month = month -1;
+        // 重新设定日期
+        d = new Date(year,month,date);
+        dat = d.toLocaleDateString();
+        a = d.getDay(year,month,1); 
+        var cmonth = d.getMonth();
+        day = new Date(year, month, 0).getDate();
+        var cday = new Date(year, cmonth, 0).getDate();
+        num = day +a -8 ;
+        showTime();
+    }
+    // 日期向后推一个月
+    function addMonth(){
+         // 清除数据
+         while(content.childNodes[0]){
+            content.removeChild(content.childNodes[0])
+        }
+        // 月份向前推一个月
+        month = month + 1;
+        // 重新设定日期
+        d = new Date(year,month,date);
+        dat = d.toLocaleDateString();
+        a = d.getDay(year,month,1); 
+        var cmonth = d.getMonth();
+        day = new Date(year, month, 0).getDate();
+        var cday = new Date(year, cmonth, 0).getDate();
+        num = day +a -8 ;
+        showTime();
+    }
+    window.onload = function(){
+        showTime();
+    }
+</script>
+
+</html>
