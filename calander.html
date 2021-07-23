@@ -12,6 +12,7 @@
             padding: 0;
             font-size: 14px;
         }
+
         #container {
             position: absolute;
             width: 210px;
@@ -22,8 +23,6 @@
             left: 50%;
             transform: translate(-50%, -50%);
             box-shadow: 4px 4px 5px #b1b1b1b2;
-            /* display: flex; */
-            /* justify-content: center; */
         }
 
         .box {
@@ -37,10 +36,12 @@
             line-height: 35px;
             cursor: pointer;
         }
-        .box:hover{
+
+        .box:hover {
             box-shadow: 2px 2px 4px #b1b1b1ad;
         }
-        .currentday{
+
+        .currentday {
             border-right: 1px solid #b1b1b1;
             border-bottom: 1px solid #b1b1b1;
             box-sizing: border-box;
@@ -51,9 +52,11 @@
             line-height: 35px;
             background-color: aqua;
         }
-        .currentday:hover{
+
+        .currentday:hover {
             box-shadow: 2px 2px 4px #b1b1b1ad;
         }
+
         #head {
             width: 100%;
             height: 15px;
@@ -129,85 +132,87 @@
     var content = document.getElementById('content');
     // 获取当前日期
     var d = new Date();
-    var b = new Date().toLocaleDateString();
-    // 日期格式化，返回本地时间格式
-    var dat = d.toLocaleDateString(); 
-    // 返回今天是几号
-    var date = d.getDate();
-    // 返回今年是哪一年
-    var year = d.getFullYear();
-    // 返回这个月是几月份
-    var month = d.getMonth() -1;  
+    var today = d.toLocaleDateString();
+    // 返回当前月
     var cmonth = d.getMonth();
+    // 返回当前几号
+    var cdate = d.getDate();
+    // 返回今年是哪一年
+     var cyear = d.getFullYear();
+    // 返回当前月一共多少天
+    var cday = new Date(cyear, cmonth, 0).getDate();
+    // 返回上个月是几月份
+    var pmonth = d.getMonth() - 1;
+    // 将日期改到1号
+    d.setDate(1);
     // 返回这个月1号是一周中的哪一天
-    var a = d.getDay(year,month,1);
+    var year = d.getFullYear();
+    // 返回当月是几月
+    var month = d.getMonth();
+    var fday = d.getDay();
     // 返回上个月一共多少天
-    var day = new Date(year, month, 0).getDate();
-    var cday = new Date(year, cmonth, 0).getDate();
+    var sday = new Date(year, pmonth, 0).getDate();
     // num表示日历表第一个空格的日期,也就是这个月1号前面有多少天,等于上个月的天数减去1号前面的天数加上1
-    var num = day + a -8; //=day-(7-a) +1
+    var num = sday + fday - 7; //=day-(7-a) 
     // 生成日历
-    function showTime(){
-    // 设置日历头部的日期
-    currentdate.innerHTML = dat ;
-    // 生成日历
-    for (let i = 0;i<35; i++){
-        var box = document.createElement('div');
-        box.setAttribute('class','box');
-        box.innerHTML = num;
-        content.appendChild(box);
-        if(dat == b ){
-            if(num === date){
-            box.setAttribute('class','currentday')
+    function showTime() {
+        // 设置日历头部的日期
+        var hday = d.toLocaleDateString()
+        currentdate.innerHTML = hday;
+        // 生成日历
+        for (let i = 0; i < 35; i++) {
+            var box = document.createElement('div');
+            box.setAttribute('class', 'box');
+            box.innerHTML = num;
+            content.appendChild(box);
+            if (month == cmonth) {
+                if (num === cdate) {
+                    box.setAttribute('class', 'currentday')
+                }
+            }
+            if (num < cday) {
+                num = num + 1;
+            } else {
+                num = 1;
+            }
         }
-        }
-        if (num <cday){
-            num = num + 1;
-        }else{
-            num = 1;
-        }
-        
-       
-       
-    }
-    }
+    };
+
     // 日期向前推一个月
-    function subMonth(){ 
+    function subMonth() {
         // 清除数据
-        while(content.childNodes[0]){
+        while (content.childNodes[0]) {
             content.removeChild(content.childNodes[0])
         }
         // 月份向前推一个月
-        month = month -1;
-        // 重新设定日期
-        d = new Date(year,month,date);
-        dat = d.toLocaleDateString();
-        a = d.getDay(year,month,1); 
-        var cmonth = d.getMonth();
-        day = new Date(year, month, 0).getDate();
-        var cday = new Date(year, cmonth, 0).getDate();
-        num = day +a -8 ;
+        month = month - 1;
+        pmonth = month -1;
+        d.setMonth(month);
+        // 获取当月1号是周几
+        fday = d.getDay();
+        sday = new Date(year, pmonth, 0).getDate();
+        num = sday + fday - 7; //=day-(7-a) 
         showTime();
-    }
+    };
+
     // 日期向后推一个月
-    function addMonth(){
-         // 清除数据
-         while(content.childNodes[0]){
+    function addMonth() {
+        // 清除数据
+        while (content.childNodes[0]) {
             content.removeChild(content.childNodes[0])
         }
         // 月份向前推一个月
         month = month + 1;
-        // 重新设定日期
-        d = new Date(year,month,date);
-        dat = d.toLocaleDateString();
-        a = d.getDay(year,month,1); 
-        var cmonth = d.getMonth();
-        day = new Date(year, month, 0).getDate();
-        var cday = new Date(year, cmonth, 0).getDate();
-        num = day +a -8 ;
+        pmonth = month +1;
+        d.setMonth(month);
+        // 获取当月1号是周几
+        fday = d.getDay();
+        sday = new Date(year, pmonth, 0).getDate();
+        num = sday + fday - 7; //=day-(7-a) 
         showTime();
-    }
-    window.onload = function(){
+    };
+
+    window.onload = function () {
         showTime();
     }
 </script>
