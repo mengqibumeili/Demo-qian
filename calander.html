@@ -35,6 +35,7 @@
             text-align: center;
             line-height: 35px;
             cursor: pointer;
+            font-size: 12px;
         }
 
         .box:hover {
@@ -42,25 +43,26 @@
         }
 
         .currentday {
-            border-right: 1px solid #b1b1b1;
-            border-bottom: 1px solid #b1b1b1;
+            border-right: 1px solid #DCDFE6;
+            border-bottom: 1px solid #DCDFE6;
             box-sizing: border-box;
             width: 30px;
             height: 35px;
             float: left;
             text-align: center;
             line-height: 35px;
-            background-color: aqua;
+            font-size: 12px;
+            background-color: #E6A23C;
         }
 
         .currentday:hover {
-            box-shadow: 2px 2px 4px #b1b1b1ad;
+            box-shadow: 2px 2px 8px #b1b1b1ad;
         }
 
         #head {
             width: 100%;
             height: 15px;
-            border-bottom: 1px solid #b1b1b1;
+            border-bottom: 1px solid #DCDFE6;
             box-sizing: border-box;
             display: flex;
             justify-content: center;
@@ -70,9 +72,9 @@
             text-align: center;
             line-height: 15px;
             height: 15px;
-            border-right: 1px solid #b1b1b1;
+            border-right: 1px solid #DCDFE6;
             cursor: pointer;
-            font-size: 12px;
+            font-size: 10px;
         }
 
         #head span:nth-child(2) {
@@ -88,7 +90,7 @@
         }
 
         #day {
-            border-bottom: 1px solid #b1b1b1;
+            border-bottom: 1px solid #DCDFE6;
             display: flex;
             box-sizing: border-box;
 
@@ -96,7 +98,7 @@
 
         #day span {
             box-sizing: border-box;
-            border-right: 1px solid #b1b1b1;
+            border-right: 1px solid #DCDFE6;
             width: 30px;
             height: 15px;
             text-align: center;
@@ -153,7 +155,7 @@
     // 返回上个月一共多少天
     var sday = new Date(year, pmonth, 0).getDate();
     // num表示日历表第一个空格的日期,也就是这个月1号前面有多少天,等于上个月的天数减去1号前面的天数加上1
-    var num = sday + fday - 7; //=day-(7-a) 
+    var num = sday + fday - 8; //=day-(7-a) 
     // 生成日历
     function showTime() {
         // 设置日历头部的日期
@@ -191,7 +193,7 @@
         // 获取当月1号是周几
         fday = d.getDay();
         sday = new Date(year, pmonth, 0).getDate();
-        num = sday + fday - 7; //=day-(7-a) 
+        num = sday + fday - 8; //=day-(7-a) 
         showTime();
     };
 
@@ -203,15 +205,15 @@
         }
         // 月份向前推一个月
         month = month + 1;
-        pmonth = month +1;
+        pmonth = month -1;
         d.setMonth(month);
         // 获取当月1号是周几
         fday = d.getDay();
         sday = new Date(year, pmonth, 0).getDate();
-        num = sday + fday - 7; //=day-(7-a) 
+        num = sday + fday - 8; //=day-(7-a) 
         showTime();
     };
-
+    
     window.onload = function () {
         showTime();
     }
